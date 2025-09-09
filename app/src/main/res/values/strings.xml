@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Cloudburst</string>
 
+    <!-- Navigation Headers -->
+    <string name="home">Home</string>
+    <string name="restaurant_header">Restaurants</string>
+    <string name="cafe_header">Cafés</string>
+    <string name="park_header">Parks</string>
+    <string name="mycelium_printer_header">Mycelium Printers</string>
+    <string name="temple_header">Temples</string>
+
     <!-- Restaurant Names -->
     <string name="restaurant_name_1">Mycelia Feast – Hall of First Harvests</string>
     <string name="restaurant_name_2">Neon Nectar (Established 2135)</string>
