@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="drawer_width">240dp</dimen>
+
+    <!-- TopAppBar Dimens -->
+    <dimen name="sunrise_shape_width">150dp</dimen>
+    <dimen name="sunrise_shape_height">118dp</dimen>
+    <dimen name="inner_circle_size">90dp</dimen>
+
+    <dimen name="sunrise_padding_right">40dp</dimen>
+    <dimen name="sunrise_padding_top">10dp</dimen>
+    <dimen name="inner_circle_padding_end">15dp</dimen>
+    <dimen name="inner_circle_padding_top">10dp</dimen>
+
+    <!-- Rounded -->
 </resources>

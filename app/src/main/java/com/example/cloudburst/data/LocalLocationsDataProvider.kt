@@ -51,7 +51,5 @@ object LocalLocationsDataProvider {
         Location(R.string.printer_name_6, R.string.printer_address_6, rating = 4, isCarbonCapturing = false, R.drawable.ic_mycelium_printer_placeholder_1, LocationCategory.MYCELIUM_PRINTER, R.string.printer_description_6)
     )
 
-    val defaultLocation
-
     val allLocations = allRestaurants + allCafes + allParks + allTemples + allMyceliumPrinters
 }
