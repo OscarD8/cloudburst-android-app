@@ -13,4 +13,7 @@
     <dimen name="inner_circle_padding_top">10dp</dimen>
 
     <!-- Rounded -->
+
+    <!-- Navigation Component Dimens -->
+<!--    <dimen name="navbar_horizontal_padding">30dp</dimen>-->
 </resources>

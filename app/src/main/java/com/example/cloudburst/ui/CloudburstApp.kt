@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,9 +26,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -82,6 +85,8 @@ fun CloudburstApp(
         }
     }
 
+    // Do I need to handle background here?
+
     Scaffold (
         topBar = {
             CloudburstTopAppBar(
@@ -131,7 +136,7 @@ fun CloudburstAppContent(
             }
         }
         else -> {
-            Row(modifier = modifier) {
+            Row(modifier = Modifier.fillMaxSize()) {
                 AnimatedVisibility(visible = navigationType == CloudburstNavigationType.NAVIGATION_RAIL) {
                     CloudburstNavigationRail(
                         currentCategory = locationUiState.currentLocationCategory,
@@ -139,17 +144,17 @@ fun CloudburstAppContent(
                         modifier = Modifier
                     )
                 }
-                Column {
+                Column(modifier = Modifier.fillMaxSize().weight(1f)) {
                     CloudburstNavHost(
                         navController = navController,
                         windowSize = windowSize,
-                        modifier = modifier
+                        modifier = modifier.weight(1f)
                     )
                     AnimatedVisibility(visible = navigationType == CloudburstNavigationType.BOTTOM_NAVBAR) {
                         CloudburstNavBar(
                             currentCategory = locationUiState.currentLocationCategory,
                             onTabPressed = onTabPressed,
-                            modifier = Modifier
+                            modifier = Modifier.fillMaxWidth()
                         )
                     }
                 }
@@ -210,6 +215,7 @@ private fun CloudburstTopAppBar(
         modifier = Modifier
             .fillMaxWidth()
             .clip(BottomRoundedShape30)
+        // Handle shadow here
     )
 }
 
@@ -220,6 +226,16 @@ fun PreviewAppBar() {
     CloudburstTheme {
         CloudburstTopAppBar(
             currentScreen = CloudburstScreen.HOME
+        )
+    }
+}
+
+@Preview
+@Composable
+fun PreviewCompactHome() {
+    CloudburstTheme {
+        CloudburstApp(
+            windowSize = WindowWidthSizeClass.Compact
         )
     }
 }
