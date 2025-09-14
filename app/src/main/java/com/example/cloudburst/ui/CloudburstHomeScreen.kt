@@ -54,12 +54,7 @@ internal fun HomeScreenCompact(
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(R.drawable.home_bg_portrait),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
+
     }
 }
 

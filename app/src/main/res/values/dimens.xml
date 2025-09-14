@@ -15,5 +15,11 @@
     <!-- Rounded -->
 
     <!-- Navigation Component Dimens -->
-<!--    <dimen name="navbar_horizontal_padding">30dp</dimen>-->
+    <dimen name="navbar_item_horizontal_padding">5dp</dimen>
+
+    <!-- Shadow Offsets -->
+    <dimen name="navbar_shadow_offset_y">2.dp</dimen>
+    <dimen name="topbar_shadow_offset_y">-2.dp</dimen>
+    <dimen name="appbars_shadow_blur_radius">8.dp</dimen>
+    <dimen name="appbars_shadow_shape_radius">30.dp</dimen>
 </resources>

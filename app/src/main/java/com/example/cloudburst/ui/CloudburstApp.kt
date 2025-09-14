@@ -2,6 +2,7 @@ package com.example.cloudburst.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,7 +28,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,6 +46,8 @@ import com.example.cloudburst.ui.theme.BottomRoundedShape30
 import com.example.cloudburst.ui.theme.CloudburstTheme
 import com.example.cloudburst.ui.theme.PopUpShape
 import com.example.cloudburst.ui.theme.SunriseShape
+import com.example.cloudburst.ui.theme.TopRoundedShape30
+import com.example.cloudburst.ui.theme.shadowCustom
 import com.example.cloudburst.ui.utils.CloudburstContentType
 import com.example.cloudburst.ui.utils.CloudburstNavigationType
 
@@ -85,24 +92,36 @@ fun CloudburstApp(
         }
     }
 
-    // Do I need to handle background here?
+    Box{
+        CloudburstBackground(modifier = Modifier.fillMaxSize())
 
-    Scaffold (
-        topBar = {
-            CloudburstTopAppBar(
-                currentScreen = currentScreen
+        Scaffold(
+            topBar = {
+                CloudburstTopAppBar(
+                    currentScreen = currentScreen
+                )
+            },
+            bottomBar = {
+                AnimatedVisibility(visible = navigationType == CloudburstNavigationType.BOTTOM_NAVBAR) {
+                    CloudburstNavBar(
+                        currentCategory = locationUiState.currentLocationCategory,
+                        onTabPressed = {  },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            },
+            containerColor = Color.Transparent
+        ) {
+            CloudburstAppContent(
+                windowSize = windowSize,
+                locationUiState = locationUiState,
+                navController = navController,
+                navigationType = navigationType,
+                contentType = contentType,
+                onTabPressed = {},
+                modifier = Modifier.padding(it)
             )
         }
-    ) {
-        CloudburstAppContent(
-            windowSize = windowSize,
-            locationUiState = locationUiState,
-            navController = navController,
-            navigationType = navigationType,
-            contentType = contentType,
-            onTabPressed = {},
-            modifier = Modifier.padding(it)
-        )
     }
 }
 
@@ -150,13 +169,6 @@ fun CloudburstAppContent(
                         windowSize = windowSize,
                         modifier = modifier.weight(1f)
                     )
-                    AnimatedVisibility(visible = navigationType == CloudburstNavigationType.BOTTOM_NAVBAR) {
-                        CloudburstNavBar(
-                            currentCategory = locationUiState.currentLocationCategory,
-                            onTabPressed = onTabPressed,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
                 }
             }
         }
@@ -214,8 +226,22 @@ private fun CloudburstTopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(MaterialTheme.colorScheme.tertiaryContainer),
         modifier = Modifier
             .fillMaxWidth()
+            .shadowCustom(
+                offsetY = dimensionResource(id = R.dimen.topbar_shadow_offset_y),
+                blurRadius = dimensionResource(id = R.dimen.appbars_shadow_blur_radius),
+                shapeRadius = dimensionResource(id = R.dimen.appbars_shadow_shape_radius)
+            )
             .clip(BottomRoundedShape30)
-        // Handle shadow here
+    )
+}
+
+@Composable
+private fun CloudburstBackground(modifier: Modifier = Modifier) {
+    Image(
+        painter = painterResource(R.drawable.bg_transparent),
+        contentDescription = null,
+        contentScale = ContentScale.Crop,
+        modifier = modifier
     )
 }
 
@@ -237,5 +263,13 @@ fun PreviewCompactHome() {
         CloudburstApp(
             windowSize = WindowWidthSizeClass.Compact
         )
+    }
+}
+
+@Preview
+@Composable
+fun PreviewBg(){
+    CloudburstTheme {
+        CloudburstBackground(modifier = Modifier.fillMaxSize())
     }
 }

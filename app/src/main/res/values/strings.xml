@@ -6,7 +6,7 @@
     <string name="restaurant_header">Restaurants</string>
     <string name="cafe_header">Cafés</string>
     <string name="park_header">Parks</string>
-    <string name="mycelium_printer_header">Mycelium Printers</string>
+    <string name="mycelium_printer_header">Printers</string>
     <string name="temple_header">Temples</string>
 
     <!-- Restaurant Names -->
