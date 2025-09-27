@@ -1,33 +1,22 @@
-# Cloudburst — MyCity App  
+# Cloudburst - MyCity Task 
 
-**Cloudburst** is a concept city information Android app. Inspired by solarpunk aesthetics, this app showcases Cloudburst’s restaurants, cafés, parks, temples, and mycelium printers through an adaptive layout designed in **Figma** and implemented with **Jetpack Compose**.  
 
----
+**Cloudburst** — a solarpunk-themed MyCity app built with Jetpack Compose to practice adaptive layouts and navigation.
 
-## About the Project  
-This project was built as part of the **Android Basics with Compose** course by Google - prompted by the task of creating a 'MyCity' app.
+## Purpose / Context
+Built as part of Google’s Android Basics with Compose course to explore adaptive layouts, clean data modeling, and navigation.
 
-- **Objective:** Practice adaptive layouts, navigation, and data modeling in Jetpack Compose.  
-- **Tech Stack:** Kotlin, Jetpack Compose, Material 3.  
-- **Design Tools:** Figma for initial concept and UI design.  
+## Tech Stack
+- Kotlin  
+- Jetpack Compose  
+- Material 3  
+- Figma (design)
 
----
-
-## Features  
-- **Home Screen** with an introduction to Cloudburst.  
-- **Category Tabs** for exploring different locations (restaurants, cafés, parks, temples, mycelium printers).  
-- **Detail Pages** with name, description, rating, sustainability indicators, and image.
-- **Favourites Page** to scroll through all categories and see list items marked as favourites. 
-- **Adaptive Layouts** supporting mobile, tablet, and expanded screen sizes with differing canonical layouts.  
-
----
-
-## Purpose  
-This project is a learning exercise intended to:  
-- Gain practical experience with **adaptive layouts**.  
-- Practice **navigation patterns** in Compose.  
-- Apply **clean data modeling** for dynamic lists.  
-- Explore **UI theming** inspired by speculative design concepts.  
+## Features
+- Adaptive layouts (mobile + tablet support)  
+- Navigation between categories (restaurants, cafés, etc.)  
+- Canonical layouts - List And Detail + List Only
+- Solarpunk-inspired UI design
 
 ---
 
