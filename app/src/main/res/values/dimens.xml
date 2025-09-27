@@ -20,6 +20,6 @@
     <!-- Shadow Offsets -->
     <dimen name="navbar_shadow_offset_y">2.dp</dimen>
     <dimen name="topbar_shadow_offset_y">-2.dp</dimen>
-    <dimen name="appbars_shadow_blur_radius">8.dp</dimen>
+    <dimen name="appbars_shadow_blur_radius">10.dp</dimen>
     <dimen name="appbars_shadow_shape_radius">30.dp</dimen>
 </resources>
