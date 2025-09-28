@@ -40,7 +40,8 @@ fun CloudburstNavHost(
     ) {
         composable(CloudburstScreen.HOME.name) {
             CloudburstHomeScreen(
-                windowSize = windowSize
+                windowSize = windowSize,
+                modifier = modifier
             )
         }
     }

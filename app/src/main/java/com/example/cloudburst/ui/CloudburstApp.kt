@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -204,7 +205,7 @@ fun CloudburstAppContent(
             }
         }
         else -> {
-            Row(modifier = Modifier.fillMaxSize()) {
+            Row(modifier = modifier) {
                 AnimatedVisibility(visible = navigationType == CloudburstNavigationType.NAVIGATION_RAIL) {
                     CloudburstNavigationRail(
                         currentCategory = locationUiState.currentLocationCategory,
@@ -212,11 +213,13 @@ fun CloudburstAppContent(
                         modifier = Modifier
                     )
                 }
-                Column(modifier = Modifier.fillMaxSize().weight(1f)) {
+                Column(
+                    modifier = Modifier.weight(1f),
+                ) {
                     CloudburstNavHost(
                         navController = navController,
                         windowSize = windowSize,
-                        modifier = modifier.weight(1f)
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
             }
@@ -322,50 +325,52 @@ private fun CloudburstBackground(modifier: Modifier = Modifier) {
 }
 
 
-@Preview
-@Composable
-fun PreviewAppBar() {
-    CloudburstTheme {
-        CloudburstTopAppBar(
-            currentScreen = CloudburstScreen.HOME
-        )
-    }
-}
+
+
+//@Preview
+//@Composable
+//fun PreviewAppBar() {
+//    CloudburstTheme {
+//        CloudburstTopAppBar(
+//            currentScreen = CloudburstScreen.HOME
+//        )
+//    }
+//}
 
 @Preview (device = PIXEL_9, name = "Compact Home")
 @Composable
 fun PreviewCompactHome() {
     CloudburstTheme {
         CloudburstApp(
-            windowSize = WindowWidthSizeClass.Compact
+            windowSize = WindowWidthSizeClass.Compact,
         )
     }
 }
 
-@Preview (device = TABLET, name = "Expanded Home Light")
-@Composable
-fun PreviewExpandedHomeLight() {
-    CloudburstTheme {
-        CloudburstApp(
-            windowSize = WindowWidthSizeClass.Expanded
-        )
-    }
-}
+//@Preview (device = TABLET, name = "Expanded Home Light")
+//@Composable
+//fun PreviewExpandedHomeLight() {
+//    CloudburstTheme {
+//        CloudburstApp(
+//            windowSize = WindowWidthSizeClass.Expanded
+//        )
+//    }
+//}
 
-@Preview (device = TABLET, name = "Expanded Home Dark")
-@Composable
-fun PreviewExpandedHomeDark() {
-    CloudburstTheme(darkTheme = true) {
-        CloudburstApp(
-            windowSize = WindowWidthSizeClass.Expanded
-        )
-    }
-}
+//@Preview (device = TABLET, name = "Expanded Home Dark")
+//@Composable
+//fun PreviewExpandedHomeDark() {
+//    CloudburstTheme(darkTheme = true) {
+//        CloudburstApp(
+//            windowSize = WindowWidthSizeClass.Expanded
+//        )
+//    }
+//}
 
-@Preview
-@Composable
-fun PreviewBg(){
-    CloudburstTheme {
-        CloudburstBackground(modifier = Modifier.fillMaxSize())
-    }
-}
+//@Preview
+//@Composable
+//fun PreviewBg(){
+//    CloudburstTheme {
+//        CloudburstBackground(modifier = Modifier.fillMaxSize())
+//    }
+//}
