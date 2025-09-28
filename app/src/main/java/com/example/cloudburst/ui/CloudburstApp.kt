@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PermanentDrawerSheet
@@ -41,6 +42,7 @@ import com.example.cloudburst.model.LocationCategory
 import com.example.cloudburst.ui.theme.BottomRoundedShape30
 import com.example.cloudburst.ui.theme.CloudburstTheme
 import com.example.cloudburst.ui.theme.PopUpShape
+import com.example.cloudburst.ui.theme.RightSideRoundedShape30
 import com.example.cloudburst.ui.theme.SunriseShape
 import com.example.cloudburst.ui.theme.shadowCustom
 import com.example.cloudburst.ui.utils.CloudburstContentType
@@ -140,7 +142,15 @@ fun CloudburstAppContent(
                             onTabPressed = onTabPressed
                         )
                     }
-                }
+                },
+                modifier = Modifier
+                    .width(dimensionResource(R.dimen.drawer_width))
+                    .clip(RightSideRoundedShape30)
+                    .shadowCustom( // TODO
+                        offsetX = dimensionResource(id = R.dimen.navbar_shadow_offset_y),
+                        blurRadius = dimensionResource(id = R.dimen.appbars_shadow_blur_radius),
+                        shapeRadius = dimensionResource(id = R.dimen.appbars_shadow_shape_radius)
+                    )
             ) {
                 CloudburstNavHost(
                     navController = navController,

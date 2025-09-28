@@ -17,6 +17,13 @@ val BottomRoundedShape30 = RoundedCornerShape(
     bottomEnd = 30.dp
 )
 
+val RightSideRoundedShape30 = RoundedCornerShape(
+    topStart = 0.dp,
+    topEnd = 30.dp,
+    bottomStart = 0.dp,
+    bottomEnd = 30.dp
+)
+
 val TopRoundedShape30 = RoundedCornerShape(
     topStart = 30.dp,
     topEnd = 30.dp,
