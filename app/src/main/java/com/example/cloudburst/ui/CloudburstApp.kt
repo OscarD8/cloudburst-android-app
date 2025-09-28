@@ -3,11 +3,15 @@ package com.example.cloudburst.ui
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -32,7 +36,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices.PIXEL_9
+import androidx.compose.ui.tooling.preview.Devices.TABLET
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -136,20 +143,25 @@ fun CloudburstAppContent(
         CloudburstNavigationType.PERMANENT_NAVIGATION_DRAWER -> {
             PermanentNavigationDrawer(
                 drawerContent = {
-                    PermanentDrawerSheet {
+                    PermanentDrawerSheet (
+                        drawerContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                        drawerShape = RightSideRoundedShape30,
+                    ) {
+                        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.navdrawer_spacer_height)))
                         CloudburstNavigationDrawerContent(
                             currentCategory = locationUiState.currentLocationCategory,
-                            onTabPressed = onTabPressed
+                            onTabPressed = onTabPressed,
+                            modifier = Modifier.padding(dimensionResource(R.dimen.navdrawer_item_horizontal_padding))
                         )
                     }
                 },
                 modifier = Modifier
                     .width(dimensionResource(R.dimen.drawer_width))
-                    .clip(RightSideRoundedShape30)
-                    .shadowCustom( // TODO
-                        offsetX = dimensionResource(id = R.dimen.navbar_shadow_offset_y),
-                        blurRadius = dimensionResource(id = R.dimen.appbars_shadow_blur_radius),
-                        shapeRadius = dimensionResource(id = R.dimen.appbars_shadow_shape_radius)
+                    .shadowCustom(
+                        offsetY = dimensionResource(R.dimen.navbar_shadow_offset_y),
+                        blurRadius = dimensionResource(R.dimen.shadow_blur_radius),
+                        shapeRadius = dimensionResource(R.dimen.shadow_shape_radius),
+                        color = Color.Gray
                     )
             ) {
                 CloudburstNavHost(
@@ -233,8 +245,8 @@ private fun CloudburstTopAppBar(
             .fillMaxWidth()
             .shadowCustom(
                 offsetY = dimensionResource(id = R.dimen.topbar_shadow_offset_y),
-                blurRadius = dimensionResource(id = R.dimen.appbars_shadow_blur_radius),
-                shapeRadius = dimensionResource(id = R.dimen.appbars_shadow_shape_radius)
+                blurRadius = dimensionResource(id = R.dimen.shadow_blur_radius),
+                shapeRadius = dimensionResource(id = R.dimen.shadow_shape_radius)
             )
             .clip(BottomRoundedShape30)
     )
@@ -242,12 +254,22 @@ private fun CloudburstTopAppBar(
 
 @Composable
 private fun CloudburstBackground(modifier: Modifier = Modifier) {
-    Image(
-        painter = painterResource(R.drawable.cloudburst_bg),
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
-        modifier = modifier
-    )
+
+    Box(modifier = modifier) {
+            Image(
+                painter = painterResource(R.drawable.cloudburst_bg),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+
+        if (isSystemInDarkTheme()) {
+            Surface (
+                color = Color.Black.copy(alpha = 0.8f),
+                modifier = Modifier.fillMaxSize()
+            ) {}
+        }
+    }
 }
 
 
@@ -261,12 +283,32 @@ fun PreviewAppBar() {
     }
 }
 
-@Preview
+@Preview (device = PIXEL_9, name = "Compact Home")
 @Composable
 fun PreviewCompactHome() {
     CloudburstTheme {
         CloudburstApp(
             windowSize = WindowWidthSizeClass.Compact
+        )
+    }
+}
+
+@Preview (device = TABLET, name = "Expanded Home Light")
+@Composable
+fun PreviewExpandedHomeLight() {
+    CloudburstTheme {
+        CloudburstApp(
+            windowSize = WindowWidthSizeClass.Expanded
+        )
+    }
+}
+
+@Preview (device = TABLET, name = "Expanded Home Dark")
+@Composable
+fun PreviewExpandedHomeDark() {
+    CloudburstTheme(darkTheme = true) {
+        CloudburstApp(
+            windowSize = WindowWidthSizeClass.Expanded
         )
     }
 }

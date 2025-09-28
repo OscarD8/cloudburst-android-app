@@ -9,6 +9,8 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemColors
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Text
@@ -24,6 +26,7 @@ import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,25 +38,33 @@ import com.example.cloudburst.ui.theme.shadowCustom
 
 @Composable
 fun CloudburstNavigationDrawerContent(
+    modifier: Modifier = Modifier,
     navItems: List<NavigationItem> = navigationItems,
     currentCategory: LocationCategory,
     onTabPressed: (LocationCategory) -> Unit
 ) {
-    navigationItems.forEach { navItem ->
+    navItems.forEach { navItem ->
         NavigationDrawerItem(
             label = {
                 Text(
-                    text = stringResource(navItem.route)
+                    text = stringResource(navItem.route),
+                    fontWeight = FontWeight.SemiBold
                 )
             },
             icon = {
                 Icon(
                     painter = painterResource(navItem.icon),
-                    contentDescription = stringResource(navItem.route)
+                    contentDescription = stringResource(navItem.route),
                 )
             },
             selected = currentCategory == navItem.locationCategory,
-            onClick = { onTabPressed(navItem.locationCategory) }
+            onClick = { onTabPressed(navItem.locationCategory) },
+            colors = NavigationDrawerItemDefaults
+                .colors(
+                    selectedContainerColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                ),
+            modifier = modifier
         )
     }
 }
@@ -93,8 +104,8 @@ fun CloudburstNavBar(
         modifier = modifier
             .shadowCustom(
                 offsetY = dimensionResource(id = R.dimen.navbar_item_horizontal_padding),
-                blurRadius = dimensionResource(id = R.dimen.appbars_shadow_blur_radius),
-                shapeRadius = dimensionResource(id = R.dimen.appbars_shadow_shape_radius)
+                blurRadius = dimensionResource(id = R.dimen.shadow_blur_radius),
+                shapeRadius = dimensionResource(id = R.dimen.shadow_shape_radius)
             )
             .clip(TopRoundedShape30)
     ) {
