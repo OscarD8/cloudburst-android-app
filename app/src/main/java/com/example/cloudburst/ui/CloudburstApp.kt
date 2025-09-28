@@ -55,6 +55,10 @@ import com.example.cloudburst.ui.theme.shadowCustom
 import com.example.cloudburst.ui.utils.CloudburstContentType
 import com.example.cloudburst.ui.utils.CloudburstNavigationType
 
+/**
+ * Defines the primary screens in the Cloudburst application.
+ * Each screen is associated with a string resource that serves as its title.
+ */
 enum class CloudburstScreen(@StringRes val title: Int){
     HOME(title = R.string.app_name),
     RESTAURANT(title = R.string.restaurant_header),
@@ -62,6 +66,20 @@ enum class CloudburstScreen(@StringRes val title: Int){
 
 }
 
+/**
+ * The root composable for the Cloudburst application.
+ *
+ * This function acts as the main entry point for the UI. It is responsible for:
+ * 1.  Determining the appropriate navigation type (`BOTTOM_NAVBAR`, `NAVIGATION_RAIL`, `PERMANENT_NAVIGATION_DRAWER`)
+ * and content type (`LIST_ONLY`, `LIST_AND_DETAIL`) based on the device's [windowSize].
+ * 2.  Setting up the main `Scaffold` which includes the top app bar and a conditional bottom navigation bar.
+ * 3.  Displaying a consistent background across the entire app.
+ * 4.  Delegating the primary content layout to [CloudburstAppContent].
+ *
+ * @param windowSize The size class of the window, used to create adaptive layouts.
+ * @param viewModel The ViewModel providing UI state for location data.
+ * @param navController The controller for navigating between screens.
+ */
 @Composable
 fun CloudburstApp(
     windowSize: WindowWidthSizeClass,
@@ -129,6 +147,20 @@ fun CloudburstApp(
     }
 }
 
+/**
+ * Renders the main content area of the app based on the selected navigation type.
+ *
+ * This composable arranges the primary UI elements, such as the navigation rail or
+ * permanent drawer, alongside the main content host ([CloudburstNavHost]).
+ *
+ * @param windowSize The current window size class.
+ * @param locationUiState The state object from the ViewModel.
+ * @param navController The navigation controller.
+ * @param navigationType The determined navigation strategy (e.g., Rail, Drawer).
+ * @param contentType The determined content strategy (e.g., List only).
+ * @param onTabPressed A lambda function to handle navigation item presses.
+ * @param modifier A [Modifier] to be applied to the root layout.
+ */
 @Composable
 fun CloudburstAppContent(
     windowSize: WindowWidthSizeClass,
@@ -192,6 +224,15 @@ fun CloudburstAppContent(
     }
 }
 
+/**
+ * A custom, styled top app bar for the Cloudburst application.
+ *
+ * Displays the current screen's title and a unique decorative "sunrise" element on the right.
+ * It features a custom shadow and a clipped shape for a distinct visual identity.
+ *
+ * @param currentScreen The [CloudburstScreen] enum for the currently displayed screen.
+ * @param modifier A [Modifier] to be applied to the app bar.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CloudburstTopAppBar(
@@ -252,9 +293,17 @@ private fun CloudburstTopAppBar(
     )
 }
 
+/**
+ * A consistent background composable for the entire app.
+ *
+ * It displays a static background image that fills the screen. It intelligently applies
+ * a semi-transparent dark overlay when the system's dark theme is active to ensure
+ * content readability and improve aesthetics. ✨
+ *
+ * @param modifier A [Modifier] to be applied to the background container.
+ */
 @Composable
 private fun CloudburstBackground(modifier: Modifier = Modifier) {
-
     Box(modifier = modifier) {
             Image(
                 painter = painterResource(R.drawable.cloudburst_bg),
