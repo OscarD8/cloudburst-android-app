@@ -36,6 +36,19 @@ import com.example.cloudburst.R
 import com.example.cloudburst.ui.theme.TopRoundedShape30
 import com.example.cloudburst.ui.theme.shadowCustom
 
+/**
+ * Renders the content within a permanent navigation drawer, typically used for large screens.
+ *
+ * This composable iterates through a list of [NavigationItem]s and displays them as selectable
+ * [NavigationDrawerItem]s. It highlights the currently selected item and handles tab press events.
+ *
+ * @param currentCategory The currently active [LocationCategory], used to highlight the selected item.
+ * @param onTabPressed A lambda function that is invoked when a navigation item is clicked,
+ * passing the selected [LocationCategory].
+ * @param modifier A [Modifier] to be applied to the content container.
+ * @param navItems A list of [NavigationItem] objects that define the content and routing
+ * for each drawer item.
+ */
 @Composable
 fun CloudburstNavigationDrawerContent(
     modifier: Modifier = Modifier,
@@ -69,6 +82,17 @@ fun CloudburstNavigationDrawerContent(
     }
 }
 
+/**
+ * A vertical navigation rail, designed for medium-sized screens like tablets in portrait mode.
+ *
+ * It displays a series of icons for top-level navigation destinations, highlighting the
+ * currently active one.
+ *
+ * @param currentCategory The currently active [LocationCategory] to be highlighted.
+ * @param onTabPressed A callback invoked with the new [LocationCategory] when an item is pressed.
+ * @param modifier A [Modifier] to be applied to the [NavigationRail].
+ * @param navItems The list of [NavigationItem]s to be displayed.
+ */
 @Composable
 fun CloudburstNavigationRail(
     currentCategory: LocationCategory,
@@ -92,6 +116,17 @@ fun CloudburstNavigationRail(
     }
 }
 
+/**
+ * A bottom navigation bar with custom styling, intended for compact screens like phones.
+ *
+ * This composable features a custom shape, shadow, and color scheme. It displays both an icon
+ * and a label for each navigation destination.
+ *
+ * @param currentCategory The currently active [LocationCategory].
+ * @param onTabPressed A lambda that fires when a user taps on a navigation item.
+ * @param modifier A [Modifier] to be applied to the [NavigationBar].
+ * @param navItems The list of [NavigationItem]s to populate the bar.
+ */
 @Composable
 fun CloudburstNavBar(
     currentCategory: LocationCategory,
