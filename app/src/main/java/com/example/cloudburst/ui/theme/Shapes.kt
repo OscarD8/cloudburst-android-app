@@ -31,6 +31,13 @@ val TopRoundedShape30 = RoundedCornerShape(
     bottomEnd = 0.dp
 )
 
+val FullRoundedShape30 = RoundedCornerShape(
+    topStart = 30.dp,
+    topEnd = 30.dp,
+    bottomStart = 30.dp,
+    bottomEnd = 30.dp
+)
+
 val PopUpShape = RoundedCornerShape(
     topStart = 60.dp,
     topEnd = 60.dp,

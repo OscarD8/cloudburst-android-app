@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -49,9 +50,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
+import androidx.constraintlayout.compose.layoutId
 import com.example.cloudburst.R
 import com.example.cloudburst.ui.theme.CloudburstTheme
+import com.example.cloudburst.ui.theme.FullRoundedShape30
 import com.example.cloudburst.ui.theme.TopRoundedShape30
 import com.example.cloudburst.ui.theme.shadowCustom
 
@@ -82,79 +86,48 @@ internal fun HomeScreenCompact(
     modifier: Modifier = Modifier
 ) {
     var isExpanded by remember { mutableStateOf(false) }
-
-    val verticalBias by animateFloatAsState(
-        targetValue = if (isExpanded) 0.3f else 0.6f,
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioLowBouncy,
-            stiffness = Spring.StiffnessVeryLow
-        )
-    )
+    val constraints = if (isExpanded) expandedConstraints else collapsedConstraints
 
     ConstraintLayout(
+        constraintSet = constraints,
+        animateChangesSpec = spring(
+            dampingRatio = Spring.DampingRatioLowBouncy,
+            stiffness = Spring.StiffnessVeryLow
+        ),
         modifier = modifier
     ) {
-        val (textBox, image) = createRefs()
 
         Image(
             painter = painterResource(R.drawable.home_cover_image),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .clip(TopRoundedShape30)
-                .constrainAs(image) {
-                    if (!isExpanded) {
-                        bottom.linkTo(textBox.bottom, margin = 36.dp)
-                    } else {
-                        top.linkTo(parent.top, margin = 36.dp)
-                    } // the logic is correct but the animation is all over the place now
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }
+                .layoutId("image")
+                .clip(FullRoundedShape30)
                 .fillMaxWidth(0.7f)
-                .shadowCustom(
-                    offsetY = 2.dp,
-                    blurRadius = 10.dp,
-                    shapeRadius = 30.dp,
-                    color = Color.Gray
-                )
         )
+
         Surface(
-            shape = RoundedCornerShape(100.dp),
+            shape = RoundedCornerShape(dimensionResource(R.dimen.home_surface_textbox_shape)),
             color = MaterialTheme.colorScheme.inverseOnSurface,
             modifier = Modifier
-                .animateContentSize(
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioLowBouncy,
-                        stiffness = Spring.StiffnessMediumLow
-                    )
-                )
-                .constrainAs(textBox) {
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    top.linkTo(parent.top) // Align to the (animated) top of the container
-
-                    this.verticalBias = verticalBias
-                }
-                .padding(10.dp)
+                .layoutId("textbox")
+                .padding(dimensionResource(R.dimen.home_surface_textbox_padding))
                 .fillMaxWidth(0.9f)
                 .shadowCustom(
-                    offsetY = 2.dp,
-                    blurRadius = 10.dp,
-                    shapeRadius = 100.dp,
-                    color = Color.Gray
+                    offsetY = dimensionResource(R.dimen.shadow_offset_y),
+                    blurRadius = dimensionResource(R.dimen.shadow_blur_radius),
+                    shapeRadius = dimensionResource(R.dimen.home_surface_textbox_shape),
                 )
         ) {
             Column (
-                modifier = Modifier.padding(24.dp),
+                modifier = Modifier.padding(dimensionResource(R.dimen.home_column_textbox_padding)),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = "Welcome to Cloudburst",
                     style = MaterialTheme.typography.headlineLarge,
                     fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.padding(top= 10.dp),
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 AnimatedVisibility(visible = isExpanded) {
@@ -162,20 +135,21 @@ internal fun HomeScreenCompact(
                         text = stringResource(R.string.home_city_description),
                         style = MaterialTheme.typography.bodyLarge,
                         textAlign = TextAlign.Justify,
-                        modifier = Modifier.padding(top = 16.dp)
+                        modifier = Modifier.padding(top = dimensionResource(R.dimen.home_text_textbox_padding))
                     )
                 }
 
                 IconButton(onClick = {isExpanded = !isExpanded}) {
                     Icon(
                         imageVector = if (!isExpanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
-                        contentDescription = "Expand or collapse"
+                        contentDescription = "Expand or collapse",
                     )
                 }
 
                 Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.outline)
+                    onClick = {}, //TODO
+                    colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.outline),
+                    elevation = ButtonDefaults.buttonElevation(dimensionResource(R.dimen.button_standard_elevation))
                 ) {
                     Row (
                         verticalAlignment = Alignment.CenterVertically,
@@ -183,14 +157,11 @@ internal fun HomeScreenCompact(
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.atr_icon),
-                            contentDescription = "Click to Explore",
-                            modifier = Modifier
-                                .size(40.dp)
-                                .padding(end = 10.dp),
+                            contentDescription = stringResource(R.string.explore_button),
                             tint = MaterialTheme.colorScheme.inverseOnSurface
                         )
                         Text(
-                            text = "Explore",
+                            text = stringResource(R.string.explore_button),
                             style = MaterialTheme.typography.headlineMedium,
                             color = MaterialTheme.colorScheme.inverseOnSurface
                         )
@@ -198,6 +169,64 @@ internal fun HomeScreenCompact(
                 }
             }
         }
+    }
+}
+
+/**
+ * A decoupled [ConstraintSet] that defines the layout for the **collapsed** state of the home screen.
+ *
+ * In this state:
+ * - The `textbox` is positioned in the vertical center with a lower bias (0.6f).
+ * - The `image` is pinned to the bottom of the `textbox`, creating a compact, layered look.
+ */
+private val collapsedConstraints = ConstraintSet {
+    val textboxRef = createRefFor("textbox")
+    val imageRef = createRefFor("image")
+
+    // Centered Lower
+    constrain(textboxRef) {
+        start.linkTo(parent.start)
+        end.linkTo(parent.end)
+        top.linkTo(parent.top)
+        bottom.linkTo(parent.bottom)
+        verticalBias = 0.6f
+    }
+
+    // Constrain image to the bottom of the textbox
+    constrain(imageRef) {
+        bottom.linkTo(textboxRef.bottom, margin = 40.dp)
+        start.linkTo(parent.start)
+        end.linkTo(parent.end)
+    }
+}
+
+/**
+ * A decoupled [ConstraintSet] that defines the layout for the **expanded** state of the home screen.
+ *
+ * In this state:
+ * - The `textbox` is biased towards the bottom of the screen (0.9f) to accommodate its expanded content.
+ * - The `image` moves independently to the top of the screen.
+ *
+ * This set is used in conjunction with `collapsedConstraints` and the `animateChangesSpec' parameter
+ * on a [ConstraintLayout] to create a smooth transition.
+ */
+private val expandedConstraints = ConstraintSet {
+    val textboxRef = createRefFor("textbox")
+    val imageRef = createRefFor("image")
+
+    // Centered higher
+    constrain(textboxRef) {
+        start.linkTo(parent.start)
+        end.linkTo(parent.end)
+        top.linkTo(parent.top)
+        bottom.linkTo(parent.bottom)
+        verticalBias = 0.9f
+    }
+
+    constrain(imageRef) {
+        top.linkTo(parent.top, margin = 16.dp)
+        start.linkTo(parent.start)
+        end.linkTo(parent.end)
     }
 }
 

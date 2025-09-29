@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Cloudburst</string>
 
+    <!-- Button Components -->
+    <string name="explore_button">Explore</string>
+
     <!-- Navigation Headers -->
     <string name="home">Home</string>
     <string name="restaurant_header">Restaurants</string>

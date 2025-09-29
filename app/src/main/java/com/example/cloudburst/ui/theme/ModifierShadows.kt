@@ -63,7 +63,7 @@ private fun Preview() {
 }
 
 fun Modifier.shadowCustom(
-    color: Color = Color.Black,
+    color: Color = Color.Gray,
     offsetX: Dp = 0.dp,
     offsetY: Dp = 0.dp,
     blurRadius: Dp = 0.dp,

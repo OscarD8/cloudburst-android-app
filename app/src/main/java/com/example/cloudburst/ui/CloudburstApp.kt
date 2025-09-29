@@ -191,10 +191,9 @@ fun CloudburstAppContent(
                 modifier = Modifier
                     .width(dimensionResource(R.dimen.drawer_width))
                     .shadowCustom(
-                        offsetY = dimensionResource(R.dimen.navbar_shadow_offset_y),
+                        offsetY = dimensionResource(R.dimen.shadow_offset_negative_y),
                         blurRadius = dimensionResource(R.dimen.shadow_blur_radius),
                         shapeRadius = dimensionResource(R.dimen.shadow_shape_radius),
-                        color = Color.Gray
                     )
             ) {
                 CloudburstNavHost(
@@ -288,7 +287,7 @@ private fun CloudburstTopAppBar(
         modifier = Modifier
             .fillMaxWidth()
             .shadowCustom(
-                offsetY = dimensionResource(id = R.dimen.topbar_shadow_offset_y),
+                offsetY = dimensionResource(id = R.dimen.shadow_offset_y),
                 blurRadius = dimensionResource(id = R.dimen.shadow_blur_radius),
                 shapeRadius = dimensionResource(id = R.dimen.shadow_shape_radius)
             )
