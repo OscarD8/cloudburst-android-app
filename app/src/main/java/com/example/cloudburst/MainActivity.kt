@@ -16,7 +16,7 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import com.example.cloudburst.ui.CloudburstApp
-import com.example.cloudburst.ui.theme.CloudburstTheme
+import com.example.core_ui.theme.CloudburstTheme
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -26,15 +26,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             CloudburstTheme {
                 val layoutDirection = LocalLayoutDirection.current
-                 Surface(
+                Surface(
                     modifier = Modifier.padding(
                         start = WindowInsets.safeDrawing.asPaddingValues().calculateStartPadding(layoutDirection),
                         end = WindowInsets.safeDrawing.asPaddingValues().calculateEndPadding(layoutDirection)
                     )
                 ) {
-                     val windowSize = calculateWindowSizeClass(this)
-                     CloudburstApp(windowSize = windowSize.widthSizeClass)
-                 }
+                    val windowSize = calculateWindowSizeClass(this)
+                    CloudburstApp(windowSize = windowSize.widthSizeClass)
+                }
             }
         }
     }

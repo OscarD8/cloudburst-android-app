@@ -3,9 +3,7 @@ package com.example.cloudburst.ui
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,23 +36,21 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices.PIXEL_9
-import androidx.compose.ui.tooling.preview.Devices.TABLET
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cloudburst.R
 import com.example.cloudburst.model.LocationCategory
-import com.example.cloudburst.ui.theme.BottomRoundedShape30
-import com.example.cloudburst.ui.theme.CloudburstTheme
-import com.example.cloudburst.ui.theme.PopUpShape
-import com.example.cloudburst.ui.theme.RightSideRoundedShape30
-import com.example.cloudburst.ui.theme.SunriseShape
-import com.example.cloudburst.ui.theme.shadowCustom
 import com.example.cloudburst.ui.utils.CloudburstContentType
 import com.example.cloudburst.ui.utils.CloudburstNavigationType
+import com.example.core_ui.theme.BottomRoundedShape30
+import com.example.core_ui.theme.CloudburstTheme
+import com.example.core_ui.theme.PopUpShape
+import com.example.core_ui.theme.RightSideRoundedShape30
+import com.example.core_ui.theme.SunriseShape
+import com.example.core_ui.extensions.shadowCustom
 
 /**
  * Defines the primary screens in the Cloudburst application.
@@ -307,12 +303,12 @@ private fun CloudburstTopAppBar(
 @Composable
 private fun CloudburstBackground(modifier: Modifier = Modifier) {
     Box(modifier = modifier) {
-            Image(
-                painter = painterResource(R.drawable.cloudburst_bg),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-            )
+        Image(
+            painter = painterResource(R.drawable.cloudburst_bg),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
 
         if (isSystemInDarkTheme()) {
             Surface (

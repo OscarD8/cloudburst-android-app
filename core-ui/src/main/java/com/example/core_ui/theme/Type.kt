@@ -1,0 +1,95 @@
+package com.example.core_ui.theme
+
+import androidx.compose.material3.Typography
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import com.example.core_ui.R
+
+val RubikFamily = FontFamily(
+    Font(R.font.rubik)
+)
+
+val Exo2Family = FontFamily(
+    Font(R.font.exo2)
+)
+
+val NunitoFamily = FontFamily(
+    Font(R.font.nunito)
+)
+
+val QuicksandFamily = FontFamily(
+    Font(R.font.quicksand)
+)
+
+val CloudburstTypography = Typography(
+    // Headlines / App Title
+    displayLarge = TextStyle(
+        fontFamily = RubikFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 36.sp
+    ),
+    displayMedium = TextStyle(
+        fontFamily = RubikFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 28.sp
+    ),
+    displaySmall = TextStyle(
+        fontFamily = RubikFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 24.sp
+    ),
+
+    // Titles / Cards / Tabs
+    headlineLarge = TextStyle(
+        fontFamily = Exo2Family,
+        fontWeight = FontWeight.Bold,
+        fontSize = 22.sp
+    ),
+    headlineMedium = TextStyle(
+        fontFamily = Exo2Family,
+        fontWeight = FontWeight.Medium,
+        fontSize = 20.sp
+    ),
+    headlineSmall = TextStyle(
+        fontFamily = Exo2Family,
+        fontWeight = FontWeight.Normal,
+        fontSize = 18.sp
+    ),
+
+    // Body Text / Descriptions
+    bodyLarge = TextStyle(
+        fontFamily = NunitoFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = NunitoFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp
+    ),
+    bodySmall = TextStyle(
+        fontFamily = NunitoFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp
+    ),
+
+    // Labels / Buttons / Badges
+    labelLarge = TextStyle(
+        fontFamily = QuicksandFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp
+    ),
+    labelMedium = TextStyle(
+        fontFamily = QuicksandFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = QuicksandFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 10.sp
+    )
+)

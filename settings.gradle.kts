@@ -21,4 +21,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "My City"
 include(":app")
- 
+include(":core-ui")
+include(":feature-home")
+include(":feature-categories")
+include(":feature-placelist")
+include(":feature-placedetail")
+include(":feature-favourites")
